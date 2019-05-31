@@ -1,0 +1,215 @@
+body, p {
+	margin: 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+.centered {
+	text-align: center !important;
+}
+
+.section {
+	padding: 3rem 1.5rem;
+}
+
+.footer-section {
+	padding: 1rem 0.5rem;
+	border-top: 1px solid rgb(236, 236, 236);
+	font-size: 12px;
+}
+
+.container {
+	margin: 0 auto;
+}
+  
+nav#navbar {
+	display: flex;
+	justify-content: space-between;
+}
+
+#navigations > ul {
+	display: flex;
+}
+
+#navigations > ul > li {
+	cursor: pointer;
+	padding: 1rem;
+}
+
+.nav-links{
+	color: black;
+	text-decoration: none;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 20px;
+}
+
+.active-link {
+	border: 1px solid #181895;
+	padding: 5px 20px;
+	border-radius: 10px;
+}
+
+.nav-links:hover {
+	color: #181895
+}
+
+.burger {
+	color: black;
+	position: absolute;
+	top: 5%;
+	right: 20px;
+	cursor: pointer; 
+}
+
+i.menu {
+	font-size: 32px;
+}
+
+#logo {
+	padding: 15px 0;
+}
+
+img.img-logo {
+	height: auto;
+	width: 100%;
+}
+  
+.billboard {
+	height: 450px;
+	background-image: url('/img/bg1.jpg');
+	background-size: cover;
+	background-position: center;
+}
+  
+.captions {
+	flex: 1;
+	display: flex;
+	padding: 15px;
+}
+  
+.caption {
+	color: #fff;
+	text-shadow: 5px 3px 6px #000;
+	text-transform: uppercase;
+	font-family: Oxygen;
+	font-weight: bolder;
+	font-size: 4em;
+	width: 50%;
+	padding: 20px;
+	position: relative;
+}
+  
+.register-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.input,
+.textarea {
+	width: 98%;
+	height: 2.25em;
+	font-size: 1rem;
+	line-height: 1.5;
+  margin: 8px 0;
+}
+
+.button {
+	border-width: 1px;
+	cursor: pointer;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.register-form {
+	border: 1px solid rgb(236, 236, 236);
+	width: 30%;
+	padding: 20px;
+}
+
+.field {
+	margin-bottom: .75rem;
+}
+
+.label {
+  display: block;
+  font-size: 1rem;
+	font-weight: 550;
+	margin-bottom: .5em;
+}
+
+.control {
+  clear: both;
+  font-size: 1rem;
+  position: relative;
+  text-align: left;
+}
+
+.btn-container {
+	margin-top: 40px;
+}
+
+.action-btn {
+  width: 100%;
+  border: 1px solid #00008a;
+  border-radius: 5px;
+  padding: 10px 10px;
+  color: #fff;
+	background-color: #00008a;
+}
+
+@media only screen and (max-width: 1023px) {
+	nav#navbar{
+		flex-direction: column;
+	}
+	#navigations {
+		background-color: black;
+	}
+	.navbar-hidden {
+		display: none;
+	}
+	.nav-links {
+		font-size: 18px;
+		color: white;
+	}
+	#logo {
+		width: 80%;
+	}
+	#navigations > ul {
+		display: flex;
+		flex-direction: column;
+		padding: 15px;
+		margin-bottom: 0;
+	}
+	#navigations > ul > li{
+		text-align: center;
+		padding: 0.5rem;
+	}
+}
+
+@media only screen and (min-width: 1023px) {
+	#logo {
+		width: 500px;
+	}
+	.burger {
+		display: none;
+	}
+}
+ 
+@media only screen and (max-width: 768px) {
+	.burger {
+		top: 15px;
+	}
+	.billboard {
+		height: 380px;
+	}
+	.caption  {
+		font-size: 2.5rem;
+		width: 100%;
+	}
+	.register-form {
+		width: 80%;
+	}
+}
