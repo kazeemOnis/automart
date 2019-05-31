@@ -153,11 +153,17 @@ img.img-logo {
 
 .action-btn {
   width: 100%;
-  border: 1px solid #00008a;
+  border: 1px solid #181895;
   border-radius: 5px;
   padding: 10px 10px;
   color: #fff;
-	background-color: #00008a;
+	background-color: #181895;
+}
+
+p.forgot-password {
+	font-size: 14px;
+	color: #181895;
+	cursor: pointer;
 }
 
 @media only screen and (max-width: 1023px) {
