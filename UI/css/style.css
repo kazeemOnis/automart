@@ -166,6 +166,32 @@ p.forgot-password {
 	cursor: pointer;
 }
 
+.admin-login-container {
+  display: flex;
+  height: 100%;
+  flex-direction: row-reverse;
+}
+
+.admin-login-column {
+  width: 50%;
+  min-height: 100vh;
+}
+
+.left-column {
+  background-image: url('/img/bg2.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.right-column-content {
+  padding: 100px;
+}
+
+h1.admin-heading {
+  font-family: sans-serif;
+  font-size: 2em;
+}
+
 @media only screen and (max-width: 1023px) {
 	nav#navbar{
 		flex-direction: column;
@@ -217,5 +243,18 @@ p.forgot-password {
 	}
 	.register-form {
 		width: 80%;
+	}
+
+	.admin-login-container {
+		flex-direction: column;
+	}
+
+	.admin-login-column {
+		width: 100%;
+		min-height: 50vh;
+	}
+
+	.right-column-content {
+		padding: 50px;
 	}
 }
