@@ -45,6 +45,12 @@ nav#navbar {
 	font-size: 20px;
 }
 
+.a-tag {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
 .active-link {
 	border: 1px solid #181895;
 	padding: 5px 20px;
@@ -53,6 +59,16 @@ nav#navbar {
 
 .nav-links:hover {
 	color: #181895
+}
+
+.ads {
+	background-color: #181895;
+	color: white;
+	text-decoration: none;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 20px;
+	padding: 5px 20px;
+	border-radius: 20px;
 }
 
 .burger {
@@ -67,6 +83,36 @@ i.menu {
 	font-size: 32px;
 }
 
+.dropdown > i {
+	font-size: 28px;
+}
+
+p.icon-description {
+	font-size: 14px;
+	font-family: lato;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
 #logo {
 	padding: 15px 0;
 }
@@ -74,6 +120,24 @@ i.menu {
 img.img-logo {
 	height: auto;
 	width: 100%;
+}
+
+.user{
+	display: flex;
+	align-items: center;
+}
+
+.user-image {
+	width: 45px;
+}
+
+img.img-user-image {
+	height: auto;
+	width: 100%;
+}
+
+.user-name{
+	justify-items: center;
 }
   
 .billboard {
@@ -192,6 +256,112 @@ h1.admin-heading {
   font-size: 2em;
 }
 
+.dashboard-section {
+	background-color: rgb(236, 236, 236);
+}
+
+.dashboard {
+	display: flex;
+	justify-content: space-between;
+}
+
+.user-profile {
+	width: 25%;
+	background-color: white;
+	border-radius: 10px;
+	padding: 20px;
+}
+
+.profile-image {
+	width: 50%;
+	margin: auto;
+}
+
+.img-profile-image {
+	border-radius: 50%;
+	width: 100%;
+	height: auto;
+}
+
+#image-button {
+	position: relative;
+	left: 80%;
+	margin-top: -10px;
+	cursor: pointer;
+}
+
+p.profile-name {
+	font-size: 22px;
+	font-family: lato;
+	text-align: center;
+}
+
+.blue {
+	color: #181895;
+}
+
+.user-ads {
+	width: 65%;
+	background-color: white;
+	border-radius: 10px;
+	padding: 20px;
+	/* min-height: 100vh; */
+}
+
+.no-ads {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  justify-content: center
+}
+
+.table {
+	width: 100%;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	border-collapse: separate;
+}
+
+.table thead td, .table thead th {
+	border-width: 0 0 2px;
+	color: #363636;
+}
+
+.table td, .table th {
+	border: solid #dbdbdb;
+	border-width: 0 0 1px;
+	padding: .5em .75em;
+	vertical-align: top;
+}
+
+.table-image {
+	height: 85px;
+	width: 150px;
+	overflow: hidden;   
+}
+
+img.img-table-image {
+	width: 100%;
+	height: auto;
+}
+
+.table-margin {
+	margin-top: 100px;
+}
+
+p.no-ads-title {
+	font-size: 20px;
+	text-transform: uppercase;
+	font-family: lato;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.hidden {
+	display: none;
+}
+
+
 @media only screen and (max-width: 1023px) {
 	nav#navbar{
 		flex-direction: column;
@@ -219,14 +389,34 @@ h1.admin-heading {
 		text-align: center;
 		padding: 0.5rem;
 	}
+	.dropdown {
+		display: none;
+	}
+	.logout {
+		color: white;
+	}
+	.dashboard {
+		flex-direction: column;
+		align-items: center;
+	}
+	.user-profile {
+		width: 50%;
+		margin-bottom: 50px;
+	}
+	.user-ads {
+		width: 90%;
+	}
 }
 
-@media only screen and (min-width: 1023px) {
+@media only screen and (min-width: 1024px) {
 	#logo {
 		width: 500px;
 	}
 	.burger {
 		display: none;
+	}
+	.user-profile {
+		height: 200px;
 	}
 }
  
@@ -258,3 +448,9 @@ h1.admin-heading {
 		padding: 50px;
 	}
 }
+
+@media screen and (max-width: 1087px) {
+	.table-wrapper {
+		overflow-x: auto;
+	}
+} 	
