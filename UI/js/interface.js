@@ -1,8 +1,14 @@
 const navbarBurger = document.getElementById('navbar-burger');
 const navigations = document.getElementById('navigations');
-const navLinks = document.getElementsByClassName('nav-links');
+const activeLink = document.getElementsByClassName('active-link')[0];
+const imageButton = document.getElementById('image-button');
+const imageUpload = document.getElementById('imageUpload');
 
 navbarBurger.addEventListener('click', () => {
   navigations.classList.toggle('navbar-hidden');
-  navLinks.classList.toggle('active-link');
+  activeLink.classList.toggle('active-link');
+});
+
+imageButton.addEventListener('click', () => {
+  imageUpload.click();
 });

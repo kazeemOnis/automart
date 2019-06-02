@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="container">
+        <nav id="navbar">
+          <div id="logo">
+            <img src="img/logo.png" alt="Auto-Mart Logo" class="img-logo">
+            <span class="burger" id="navbar-burger">
+                <i class="material-icons menu">menu</i>
+              </span>
+          </div>
+          <div id="navigations" class="navbar-hidden">
+            <ul>
+              <li style="margin-top: 10px">
+                <a href="/advert.html" class="ads">POST AD</a>
+              </li>
+              <li class="dropdown">
+                <i class="material-icons">account_circle</i>
+                <i class="material-icons">arrow_drop_down</i>
+                <p class="icon-description">My Profile</p>
+                <div class="dropdown-content">
+                  <div class="user">
+                    <div class="user-image">
+                      <img src="img/user-placeholder.png" alt="By Greasemann - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=57493365" class="img-user-image">
+                    </div>
+                    <p class="user-name"><a class="a-tag" href="/profile.html">Kazeem Onisarotu</a></p>
+                  </div>
+                </div>
+              </li>
+              <li class="logout">
+                <i class="material-icons">logout</i>
+                <p class="icon-description">Logout</p>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+  </header>
+
+  <section class="section dashboard-section">
+    <h1 class="centered">Welcome To Your Dashboard</h1>
+    <div class="dashboard">
+      <div class="user-profile">
+        <div class="profile-image">
+          <img src="img/user-placeholder.png" alt="By Greasemann - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=57493365" class="img-profile-image">
+          
+          <div id="image-button">
+            <i class="material-icons camera">camera_alt</i>
+          </div>
+          <input type="file" id="imageUpload" style="display: none"/>
+        </div>
+
+        <p class="profile-name"><a class="a-tag blue" href="/profile.html">Kazeem Onisarotu</a></p>
+      </div>
+  
+      <div class="user-ads">
+        <div class="no-ads hidden">
+          <p class="no-ads-title">No available ads</p>
+          <a href="/advert.html" class="ads">POST AD TODAY</a>
+        </div>
+
+        <div class="table-wrapper">
+          <h2 class="centered">Your Posted Ads</h2>
+          <table class="table ads-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Make</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="#">
+                  <span>1</span>
+                </td>
+                <td data-label="Image">
+                  <div class="table-image">
+                    <img src="img/car1.jpg" alt="car" class="img-table-image">
+                  </div>
+                </td>
+                <td data-label="Make" class="centered">
+                  <span>Dodge</span>
+                </td>
+                <td data-label="Title" class="centered">
+                  <span>Camaro Sport</span>
+                </td>
+                <td data-label="Year">
+                  <span>2014</span>
+                </td>
+                <td data-label="Price">
+                  <span>&#8358;2,000,000</span>
+                </td>
+                <td data-label="" class="centered">
+                  <i class="material-icons"><a href="user-ad.html" class="a-tag">edit</a></i>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="#">
+                  <span>2</span>
+                </td>
+                <td data-label="Image">
+                  <div class="table-image">
+                    <img src="img/car3.jpg" alt="car" class="img-table-image">
+                  </div>
+                </td>
+                <td data-label="Make" class="centered">
+                  <span>Audi</span>
+                </td>
+                <td data-label="Title" class="centered">
+                  <span>A4</span>
+                </td>
+                <td data-label="Year">
+                  <span>2012</span>
+                </td>
+                <td data-label="Price">
+                    <span>&#8358;6,000,000</span>
+                </td>
+                <td data-label="" class="centered">
+                    <i class="material-icons"><a href="user-ad.html" class="a-tag">edit</a></i>
+                </td>
+              </tr>
+              <tr>
+                <td data-label="#">
+                  <span>3</span>
+                </td>
+                <td data-label="Image">
+                  <div class="table-image">
+                    <img src="img/car3.jpg" alt="car" class="img-table-image">
+                  </div>
+                </td>
+                <td data-label="Make" class="centered">
+                  <span>Audi</span>
+                </td>
+                <td data-label="Title" class="centered">
+                  <span>A5</span>
+                </td>
+                <td data-label="Year">
+                  <span>2014</span>
+                </td>
+                <td data-label="Price">
+                  <span>&#8358;9,000,000</span>
+                </td>
+                <td data-label="" class="centered">
+                  <i class="material-icons"><a href="user-ad.html" class="a-tag">edit</a></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-wrapper table-margin">
+          <h2 class="centered">Your Purchase Orders</h2>
+          <div class="no-ads hidden">
+            <p class="no-ads-title">No available orders</p>
+            <a href="/index.html" class="ads">Make an order</a>
+          </div>
+          <table class="table purchase-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Image</th>
+                <th>Make</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th> </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="#">
+                  <span>1</span>
+                </td>
+                <td data-label="Image">
+                  <div class="table-image">
+                    <img src="img/car2.jpg" alt="car" class="img-table-image">
+                  </div>
+                </td>
+                <td data-label="Make" class="centered">
+                  <span>Toyota</span>
+                </td>
+                <td data-label="Title" class="centered">
+                  <span>Tacoma</span>
+                </td>
+                <td data-label="Year">
+                  <span>2010</span>
+                </td>
+                <td data-label="Price">
+                    <span>&#8358;9,000,000</span>
+                </td>
+                <td data-label="" class="centered">
+                  <i class="material-icons"><a href="purchase-order.html" class="a-tag">edit</a></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <section class="footer-section">
+      <p>Copyright 2019 | Auto-Mart All rights reserved.</p>
+    </section>
+  </footer>
+
+  <script src="js/interface.js"></script>
+</body>
+
+</html>
