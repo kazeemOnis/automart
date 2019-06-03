@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Auto-Mart Home Page</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+				rel="stylesheet">
+</head>
+<body>
+	<header>
+		<div class="container">
+			<nav id="navbar">
+				<div id="logo">
+					<img src="img/logo.png" alt="Auto-Mart Logo" class="img-logo">
+					<span class="burger" id="navbar-burger">
+							<i class="material-icons menu">menu</i>
+						</span>
+				</div>
+				<div id="navigations" class="navbar-hidden">
+					<ul>
+						<li style="margin-top: 10px">
+							<a href="/advert.html" class="ads">POST AD</a>
+						</li>
+						<li class="dropdown">
+							<i class="material-icons">account_circle</i>
+							<i class="material-icons">arrow_drop_down</i>
+							<p class="icon-description">My Profile</p>
+							<div class="dropdown-content">
+								<div class="user">
+									<div class="user-image">
+										<img src="img/user-placeholder.png" alt="By Greasemann - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=57493365" class="img-user-image">
+									</div>
+									<p class="user-name"><a class="a-tag" href="/profile.html">Kazeem Onisarotu</a></p>
+								</div>
+							</div>
+						</li>
+						<li class="logout">
+							<i class="material-icons">logout</i>
+							<p class="icon-description">Logout</p>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+
+		<div class="billboard">
+			<div class="captions">
+				<div class="caption">
+					<p>Buy And Sell Cars With Trusted
+						Dealers Today
+					</p>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<section class="section dashboard-section">
+		<div class="all-cars">
+			<aside class="search-bar box">
+				<form action="">
+					<div class="field">
+						<label for="brand" class="label">Brand</label>
+						<div class="control">
+							<select name="make" id="brandSelect">
+							</select>
+						</div>
+					</div>
+					
+					<div class="field"> 
+						<label for="transmission" class="label">Transmission</label>
+						<div class="control">
+							<select name="transmission" id="transSelect">
+							</select>
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="condition" class="label">Condition</label>
+						<div class="control">
+							<select name="condition" id="condSelect">
+							</select>
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="year" class="label">Year</label>
+						<div class="control">
+								<input type="number" autocomplete="on" name="year" min="1970" placeholder="Select Year" class="input">
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="colour" class="label">Colour</label>
+						<div class="control">
+							<select name="colour" id="colourSelect">
+							</select>
+						</div>
+					</div>
+
+					<div class="field">
+						<label for="price" class="label">Price Range</label>
+						<div class="control">
+							<select name="price" id="priceSelect">
+							</select>
+						</div>
+					</div>
+
+					<div class="btn-container">
+						<button class="button action-btn">
+							Search
+						</button>
+					</div>
+
+				</form>
+			</aside>
+
+			<div class="view-cars">
+				<div class="box car">
+					<div class="car-image">
+						<a href="/car.html">
+							<img src="img/car1.jpg" alt="car" class="img-table-image">
+						</a>
+					</div>
+					<div class="car-details">
+						<p class="details">
+							<span class="year">2016</span>
+							<span class="title">Range Rover Sport</span>
+							<span class="colour">White</span>
+						</p>
+						<p class="description">
+							Brand new Range Rover Sport 2016. Clean & nice.
+						</p>
+						<p class="condition">
+							New
+						</p>
+						<p class="transmision">
+							Automatic
+						</p>
+					</div>
+					<div class="car-price">
+						<p class="price">&#8358;15,000,000</p>
+					</div>
+				</div>
+
+				<div class="box car">
+					<div class="car-image">
+						<a href="/car.html">
+							<img src="img/car2.jpg" alt="car" class="img-table-image">
+						</a>
+					</div>
+					<div class="car-details">
+						<p class="details">
+							<span class="year">2016</span>
+							<span class="title">Range Rover Sport</span>
+							<span class="colour">White</span>
+						</p>
+						<p class="description">
+							Brand new Range Rover Sport 2016. Clean & nice.
+						</p>
+						<p class="condition">
+							New
+						</p>
+						<p class="transmision">
+							Automatic
+						</p>
+					</div>
+					<div class="car-price">
+						<p class="price">&#8358;15,000,000</p>
+					</div>
+				</div>
+
+				<div class="box car">
+					<div class="car-image">
+						<a href="/car.html">
+							<img src="img/car3.jpg" alt="car" class="img-table-image">
+						</a>
+					</div>
+					<div class="car-details">
+						<p class="details">
+							<span class="year">2016</span>
+							<span class="title">Range Rover Sport</span>
+							<span class="colour">White</span>
+						</p>
+						<p class="description">
+							Brand new Range Rover Sport 2016. Clean & nice.
+						</p>
+						<p class="condition">
+							New
+						</p>
+						<p class="transmision">
+							Automatic
+						</p>
+					</div>
+					<div class="car-price">
+						<p class="price">&#8358;15,000,000</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+    <section class="footer-section">
+      <p>Copyright 2019 | Auto-Mart All rights reserved.</p>
+    </section>
+  </footer>
+	<script src="js/interface.js"></script>
+</body>
+</html>
