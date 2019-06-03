@@ -239,11 +239,21 @@ select {
 .action-btn {
 	width: 100%;
 	font-size: 16px;
-  border: 1px solid #181895;
-  border-radius: 5px;
-  padding: 10px 10px;
-  color: #fff;
+	border: 1px solid #181895;
+	border-radius: 5px;
+	padding: 10px 10px;
+	color: #fff;
 	background-color: #181895;
+}
+
+.action-btn2 {
+	width: 100%;
+	font-size: 16px;
+	border: 1px solid red;
+	border-radius: 5px;
+	padding: 10px 10px;
+	color: #fff;
+	background-color: red;
 }
 
 p.forgot-password {
@@ -438,6 +448,27 @@ p.no-ads-title {
 	min-height: 100vh;
 }
 
+.car-ad {
+	width: 65%;
+}
+
+.car-ad-image {
+	height: 60%;
+	width: 100%;
+	overflow: hidden; 
+	margin-bottom: 20px;
+}
+
+.car-images {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.other-images {
+	width: 20%;
+}
+
 .car {
 	display: flex;
 	justify-content: space-between;
@@ -470,10 +501,36 @@ p.no-ads-title {
 	font-size: 18px;
 }
 
+.spec {
+	margin-top: 10px;
+	font-weight: 300;
+}
+
+.is-flex {
+	display: flex;
+	justify-content: space-between;
+}
 .hidden {
 	display: none !important;
 }
 
+.spec-def {
+	margin-bottom: 10px;
+}
+
+.ad-details {
+	width: 25%;
+}
+
+.ad-price {
+	background-color: #181895;
+	padding: 10px;
+	color: white;
+	font-size: 22px;
+	font-family: lato;
+	font-weight: bold;
+	text-align: center;
+}
 
 @media only screen and (max-width: 1023px) {
 	nav#navbar{
@@ -578,6 +635,19 @@ p.no-ads-title {
 	}
 	.car-image {
 		width: 100%;
+	}
+	.car-ad {
+		width: 90%;
+	}
+	.ad-details {
+		margin-top: 50px;
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.is-flex {
+		width: 50%;
 	}
 }
 
