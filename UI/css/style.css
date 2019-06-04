@@ -704,6 +704,19 @@ aside.side-navbar {
 	justify-content: space-between;
 }
 
+.update-advert{
+	display: flex;
+	justify-content: space-between;
+}
+
+.update-advert-details {
+	width: 45%;
+}
+
+.advert-orders {
+	width: 45%;
+}
+
 @media only screen and (max-width: 1023px) {
 	nav#navbar{
 		flex-direction: column;
@@ -839,6 +852,17 @@ aside.side-navbar {
 	.admin-dashboard-container {
 		width: 100%;
 	}
+	.update-advert{
+		justify-content: flex-end;
+		flex-direction: column;
+	}
+	.advert-orders {
+		width: 90%;
+		margin-top: 50px;
+	}
+	.update-advert-details {
+		width: 100%;
+	} 
 }
 
 @media only screen and (min-width: 768px) {
