@@ -126,9 +126,31 @@
 						<p>Do not pay in advance!</p>
 					</div>
 
-					<button class="button action-btn2">
-						Report Ad
+					<button class="button action-btn2" id="reportBtn">
+						 Report Ad
 					</button>
+
+					<div class="modal" id="flagModal">
+						<div class="modal-content">
+							<div class="modal-header">
+								<span class="modal-close">&times;</span>
+								<p>Report Ad</p>
+							</div>
+
+							<div class="modal-body centered">
+								<p style="font-size: 18px;">Are you sure you want to report this ad?</p>
+							</div>
+
+							<div class="modal-footer">
+								<button class="button action-btn">
+									Yes
+								</button>
+								<button class="button action-btn2" id="modal-close">
+									No
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

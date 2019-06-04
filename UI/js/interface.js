@@ -8,6 +8,11 @@ const brandSelect = document.getElementById('brandSelect');
 const colourSelect = document.getElementById('colourSelect');
 const condSelect = document.getElementById('condSelect');
 const priceSelect = document.getElementById('priceSelect');
+const reportBtn = document.getElementById('reportBtn');
+const flagModal = document.getElementById('flagModal');
+const close = document.getElementsByClassName('modal-close')[0];
+const modalClose = document.getElementById('modal-close');
+
 const priceOptions = ['&#8358;0 - &#8358;999,999', '&#8358;1,000,000 - &#8358;1,999,999',
   '&#8358;2,000,000 - &#8358;4,999,999', '&#8358;5,000,000 +'];
 const transmissions = ['Automatic', 'Manual'];
@@ -48,6 +53,30 @@ if (priceSelect !== null) {
     condSelect.innerHTML += `<option>${priceOptions[i]}</option>`;
   }
 }
+
+if (reportBtn !== null) {
+  reportBtn.onclick = () => {
+    flagModal.style.display = 'block';
+  };
+}
+
+if (close !== undefined) {
+  close.onclick = () => {
+    flagModal.style.display = 'none';
+  };
+}
+
+if (modalClose !== null) {
+  modalClose.onclick = () => {
+    flagModal.style.display = 'none';
+  };
+}
+
+window.onclick = (event) => {
+  if (event.target === flagModal) {
+    flagModal.style.display = 'none';
+  }
+};
 
 navbarBurger.addEventListener('click', () => {
   navigations.classList.toggle('navbar-hidden');
