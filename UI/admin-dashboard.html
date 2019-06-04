@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Admin Dashboard</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+</head>
+
+<body>
+	<section class="admin-dashboard">
+		<aside class="side-navbar">
+			<div class="admin-details">
+				<p class="admin-details-name">
+					Kazeem Onisarotu
+				</p>
+				<p class="admin-details-role">
+					Administrator
+				</p>
+			</div>
+			<div class="admin-navigation">
+				<ul class="navigation-list">
+					<li class="navigation-list-li">
+						<a href="admin-cars.html" class="navigation-list-link">
+							<i class="material-icons">directions_car</i>  CARS
+						</a>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<div class="admin-dashboard-container">
+			<div class="top-navbar">
+				<div class="top-navbar-right">
+					<p class="page-title">
+						Cars
+					</p>
+				</div>
+				<div class="top-navbar-left">
+					<i title="Logout" class="material-icons">logout</i>
+				</div>
+			</div>
+			<div class="admin-dashboard-content">
+			<div class="table-wrapper">
+					<h2 class="centered">All Cars</h2>
+					<table class="table ads-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Image</th>
+								<th>Make</th>
+								<th>Owner</th>
+								<th>Sold</th>
+								<th>Flagged</th>
+								<th> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-label="#">
+									<span>1</span>
+								</td>
+								<td data-label="Image">
+									<div class="table-image">
+										<img src="img/car1.jpg" alt="car" class="img-table-image">
+									</div>
+								</td>
+								<td data-label="Make" class="centered">
+									<span>Dodge</span>
+								</td>
+								<td data-label="Owner" class="centered">
+									<span>Kazeem Onisarotu</span>
+								</td>
+								<td data-label="Sold">
+									<span>No</span>
+								</td>
+								<td data-label="Flagged">
+									<span>No</span>
+								</td>
+								<td data-label="" class="centered">
+										<i class="material-icons">delete</i>
+								</td>
+							</tr>
+							<tr>
+								<td data-label="#">
+									<span>2</span>
+								</td>
+								<td data-label="Image">
+									<div class="table-image">
+										<img src="img/car3.jpg" alt="car" class="img-table-image">
+									</div>
+								</td>
+								<td data-label="Make" class="centered">
+									<span>Audi</span>
+								</td>
+								<td data-label="Owner" class="centered">
+									<span>Kazeem Onisarotu</span>
+								</td>
+								<td data-label="Sold">
+									<span>No</span>
+								</td>
+								<td data-label="Flagged">
+										<span>No</span>
+								</td>
+								<td data-label="" class="centered">
+										<i class="material-icons">delete</i>
+								</td>
+							</tr>
+							<tr>
+								<td data-label="#">
+									<span>3</span>
+								</td>
+								<td data-label="Image">
+									<div class="table-image">
+										<img src="img/car3.jpg" alt="car" class="img-table-image">
+									</div>
+								</td>
+								<td data-label="Make" class="centered">
+									<span>Audi</span>
+								</td>
+								<td data-label="Owner" class="centered">
+									<span>Kazeem Onisarotu</span>
+								</td>
+								<td data-label="Sold">
+									<span>No</span>
+								</td>
+								<td data-label="Flagged">
+									<span>No</span>
+								</td>
+								<td data-label="" class="centered">
+									<i class="material-icons">delete</i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
