@@ -328,6 +328,13 @@ p.profile-name {
 	text-align: center;
 }
 
+p.profile-email {
+	font-size: 18px;
+	font-family: lato;
+	font-weight: 300;
+	text-align: center;
+}
+
 .blue {
 	color: #181895;
 }
@@ -440,6 +447,13 @@ p.no-ads-title {
 .box {
 	background-color: white;
 	border-radius: 10px;
+	padding: 20px;
+}
+
+.box1 {
+	background-color: white;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 	padding: 20px;
 }
 
@@ -685,6 +699,11 @@ aside.side-navbar {
 	padding: 30px 50px 50px;
 }
 
+.purchase-order {
+	display: flex;
+	justify-content: space-between;
+}
+
 @media only screen and (max-width: 1023px) {
 	nav#navbar{
 		flex-direction: column;
@@ -769,6 +788,20 @@ aside.side-navbar {
 
 	.right-column-content {
 		padding: 50px;
+	}
+
+	.purchase-order {
+		flex-direction: column;
+	}
+
+	.purchase-details {
+		width: 90% !important;
+		margin-top: 0px !important;
+		margin-bottom: 50px;
+	}
+
+	.purchase-car {
+		width: 85% !important;
 	}
 }
 

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Update Purchase Order</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+
+<body>
+	<header>
+		<div class="container">
+			<nav id="navbar">
+				<div id="logo">
+					<img src="img/logo.png" alt="Auto-Mart Logo" class="img-logo">
+					<span class="burger" id="navbar-burger">
+							<i class="material-icons menu">menu</i>
+						</span>
+				</div>
+				<div id="navigations" class="navbar-hidden">
+					<ul>
+						<li style="margin-top: 10px">
+							<a href="/advert.html" class="ads">POST AD</a>
+						</li>
+						<li class="dropdown">
+							<i class="material-icons">account_circle</i>
+							<i class="material-icons">arrow_drop_down</i>
+							<p class="icon-description">My Profile</p>
+							<div class="dropdown-content">
+								<div class="user">
+									<div class="user-image">
+										<img src="img/user-placeholder.png" alt="By Greasemann - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=57493365" class="img-user-image">
+									</div>
+									<p class="user-name"><a class="a-tag" href="/profile.html"></a>Kazeem Onisarotu</a></p>
+								</div>
+							</div>
+						</li>
+						<li class="logout">
+							<i class="material-icons">logout</i>
+							<p class="icon-description">Logout</p>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+
+  <section class="section dashboard-section">
+		<div class="container">
+			<h1 class="centered">Update your purchase order price</h1>
+			<div class="purchase-order">
+				<div class="ad-details purchase-details">
+					<div class="ad-price">
+						<p class="price">Bid - &#8358; 9,000,000</p>
+					</div>
+	
+					<div class="box1">
+						<div class="ad-profile">
+							<div class="profile-image">
+								<img src="img/user-placeholder.png" alt="By Greasemann - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=57493365" class="img-profile-image">
+							</div>
+							<p class="profile-name">Seller - Kazeem Onisarotu</p>
+							<p class="profile-email">konisarotu@yahoo.com</p>
+						</div>
+	
+						<div class="field">
+							<div class="control">
+									<input type="number" autocomplete="on" name="price" min="0" placeholder="Enter Purchase Price" class="input">
+								</select>
+							</div>
+						</div>
+	
+						<button class="button action-btn">
+							Update Order
+						</button>
+						
+						<div style="margin-bottom: 10px;">
+							<p class="centered" style="margin: 10px 0; font-weight: bold;">Safety Tips</p>
+							<p style="margin-bottom: 5px;">Do not pay in advance!</p>
+							<p>Visit car before you pay!</p>
+						</div>
+	
+						<button class="button action-btn2" id="reportBtn">
+							Report Ad
+						</button>
+	
+						<div class="modal" id="flagModal">
+							<div class="modal-content">
+								<div class="modal-header">
+									<span class="modal-close">&times;</span>
+									<p>Report Ad</p>
+								</div>
+	
+								<div class="modal-body centered">
+									<p style="font-size: 18px;">Are you sure you want to report this ad?</p>
+								</div>
+	
+								<div class="modal-footer">
+									<button class="button action-btn">
+										Yes
+									</button>
+									<button class="button action-btn2" id="modal-close">
+										No
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="car-ad box  purchase-car">
+						<div class="car-ad-image">
+							<img src="img/car1.jpg" alt="car" class="img-table-image">
+						</div>
+						
+						<div class="car-images">
+							<div class="other-images">
+								<img src="img/car1.jpg" alt="car" class="img-table-image">
+							</div>
+		
+							<div class="other-images">
+									<img src="img/car1.jpg" alt="car" class="img-table-image">
+							</div>
+		
+							<div class="other-images">
+									<img src="img/car1.jpg" alt="car" class="img-table-image">
+							</div>
+		
+							<div class="other-images">
+									<img src="img/car1.jpg" alt="car" class="img-table-image">
+							</div>
+						</div>
+		
+						<div class="car-details">
+							<p class="details">
+								<span class="year">2016</span>
+								<span class="brand">Audi</span>
+								<span class="title">A4</span>
+								<span class="colour">White</span>
+							</p>
+		
+							<p>Performance & Specifications</p>
+							<div class="spec is-flex">
+								<div>
+									<p class="spec-def">Transmission</p>
+									<p class="spec-def">Condition</p>
+									<p class="spec-def">Colour</p>
+								</div>
+		
+								<div>
+									<p class="spec-def">Manual</p>
+									<p class="spec-def">New</p>
+									<p class="spec-def">Blue</p>
+								</div> 
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+  </header>
+
+  <footer>
+    <section class="footer-section">
+      <p>Copyright 2019 | Auto-Mart All rights reserved.</p>
+    </section>
+  </footer>
+
+  <script src="js/interface.js"></script>
+</body>
+
+</html>
