@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Post Sales Ad</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+				rel="stylesheet">
+</head>
+<body>
+	<header>
+		<div class="container">
+			<nav id="navbar">
+				<div id="logo">
+					<img src="img/logo.png" alt="Auto-Mart Logo" class="img-logo">
+					<span class="burger" id="navbar-burger">
+							<i class="material-icons menu">menu</i>
+						</span>
+				</div>
+				<div id="navigations" class="navbar-hidden">
+					<ul>
+						<li style="margin-top: 10px">
+							<a href="/advert.html" class="ads">POST AD</a>
+						</li>
+						<li class="dropdown">
+							<i class="material-icons">account_circle</i>
+							<i class="material-icons">arrow_drop_down</i>
+							<p class="icon-description">My Profile</p>
+							<div class="dropdown-content">
+								<div class="user">
+									<div class="user-image">
+										<img src="img/user-placeholder.png" alt="By Greasemann - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=57493365" class="img-user-image">
+									</div>
+									<p class="user-name"><a class="a-tag" href="/profile.html">Kazeem Onisarotu</a></p>
+								</div>
+							</div>
+						</li>
+						<li class="logout">
+							<i class="material-icons">logout</i>
+							<p class="icon-description">Logout</p>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</header>
+	
+	<section class="section dashboard-section">
+		<h1 class="centered">Update Ad</h1>
+		<div class="update-advert">
+			<div class="user-advertisement update-advert-details">
+				<div class="advertisement">
+					<h2>Ad Details</h2>
+					<p class="ad-status" style="margin-bottom: 10px;
+					font-size: 18px;">Status: Un-Sold</p>
+					<form action="" class="advert-form">
+						<p style="font-size: 16px; color: #464b4f;">Add photos to your ads. Accepted formats are .jpg, .jpeg and .png. Max upload size for files is 5 MB.</p>
+						<div class="upload-images">
+							<div class="upload-image-container">
+								<i class="material-icons upload-icon hidden">camera_alt</i>
+								<img src="img/car3.jpg" alt="" class="img-table-image">
+							</div>
+							<div class="upload-image-container">
+								<i class="material-icons upload-icon">camera_alt</i>
+							</div>
+							<div class="upload-image-container">
+								<i class="material-icons upload-icon">camera_alt</i>
+							</div>
+							<div class="upload-image-container">
+								<i class="material-icons upload-icon">camera_alt</i>
+							</div>
+	
+							<input type="file" id="imageUpload" style="display: none"/>
+						</div>
+						<div class="field">
+							<label for="title" class="label">Title</label>
+							<div class="control">
+								<input type="text" autocomplete="on" name="title" placeholder="Enter Title" class="input">
+							</div>
+						</div>
+	
+						<div class="field">
+							<label for="brand" class="label">Brand</label>
+							<div class="control">
+								<select name="make" id="brandSelect">
+								</select>
+							</div>
+						</div>	
+									
+						<div class="field">
+							<label for="transmission" class="label">Transmission</label>
+							<div class="control">
+								<select name="transmission" id="transSelect">
+								</select>
+							</div>
+						</div>
+	
+						<div class="field">
+							<label for="year" class="label">Year</label>
+							<div class="control">
+									<input type="number" autocomplete="on" name="year" min="1970" placeholder="Select Year" class="input">
+							</div>
+						</div>
+	
+						<div class="field">
+							<label for="colour" class="label">Colour</label>
+							<div class="control">
+								<select name="colour" id="colourSelect">
+								</select>
+							</div>
+						</div>
+	
+						<div class="field">
+							<label for="price" class="label">Price</label>
+							<div class="control">
+								<input type="number" autocomplete="on" name="price" min="0" placeholder="&#8358; Enter Price" class="input">
+							</div>
+						</div>
+	
+						<div class="field">
+							<label for="description" class="label">Description</label>
+							<div class="control">
+								<textarea name="description" rows="5" placeholder="Enter Description" class="textarea"></textarea>
+							</div>
+						</div>
+	
+						<div class="btn-container">
+							<button class="button action-btn">
+								Update
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+	
+			<div class="advert-orders box">
+				<div class="table-wrapper">
+					<h2 class="centered">Purchase Orders</h2>
+					<table class="table ads-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Bidder</th>
+								<th>Bid Price</th>
+								<th> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td data-label="#">
+									<span>1</span>
+								</td>
+								<td data-label="Bidder" class="centered">
+									<span>Kazeem Onisarotu</span>
+								</td>
+								<td data-label="Bidder Price" class="centered">
+									<span>&#8358; 9,000,000</span>
+								</td>
+								<td data-label="" class="centered">
+									<i class="material-icons" title="Sell to User">check</i>
+								</td>
+							</tr>
+							<tr>
+								<td data-label="#">
+									<span>2</span>
+								</td>
+								<td data-label="Bidder" class="centered">
+									<span>Kazeem Onisarotu</span>
+								</td>
+								<td data-label="Bidder Price" class="centered">
+									<span>&#8358; 9,000,000</span>
+								</td>
+								<td data-label="" class="centered">
+										<i class="material-icons" title="Sell to User">check</i>
+								</td>
+							</tr>
+							<tr>
+								<td data-label="#">
+									<span>3</span>
+								</td>
+								<td data-label="Bidder" class="centered">
+									<span>Kazeem Onisarotu</span>
+								</td>
+								<td data-label="Bidder Price" class="centered">
+									<span>&#8358; 9,000,000</span>
+								</td>
+								<td data-label="" class="centered">
+									<i class="material-icons" title="Sell to User">check</i>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/interface.js"></script>
+</body>
+</html>
