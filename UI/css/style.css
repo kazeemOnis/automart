@@ -173,6 +173,7 @@ img.img-user-image {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	height: 750px;
 }
 
 .input {
@@ -290,6 +291,12 @@ h1.admin-heading {
 
 .dashboard-section {
 	background-color: rgb(236, 236, 236);
+	min-height: 780px;
+}
+
+.car-section {
+	background-color: rgb(236, 236, 236);
+	min-height: 1100px;
 }
 
 .dashboard {
@@ -425,7 +432,7 @@ p.no-ads-title {
 	border: 1px solid #181895;
 	display: flex;
 	justify-content: center;
-	height: 120px;
+	height: 100%;
 	align-items: center;
 	width: 20%
 }
