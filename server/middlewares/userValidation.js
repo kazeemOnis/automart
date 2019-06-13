@@ -36,4 +36,26 @@ export default class UserValidation {
       return res.status(serverError.status).send(serverError);
     }
   }
+
+  static validateSignin(req, res, next) {
+    try {
+      const userParameters = ['email', 'password'];
+      const { email } = req.body;
+      const validProperties = propertyChecker(req.body, ...userParameters);
+      if (!validProperties) {
+        throw new ApiError('Invalid SignIn Form', 401);
+      }
+      if (!regexChecker(emailRegex, email.toLowerCase().trim())) {
+        throw new ApiError('Invalid Email', 400);
+      }
+      return next();
+    } catch (err) {
+      if (err.name === 'ApiError') {
+        return res.status(err.status).send(
+          { status: err.status, message: err.message, success: err.success },
+        );
+      }
+      return res.status(serverError.status).send(serverError);
+    }
+  }
 }
