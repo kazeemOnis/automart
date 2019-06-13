@@ -1,6 +1,6 @@
 import User from '../models/userModel';
 import {
-  ApiError, serverError, hashPassword, generateToken,
+  ApiError, serverError, hashPassword, generateToken, comparePassword,
 } from '../helpers/index';
 
 export default class UserController {
@@ -22,6 +22,33 @@ export default class UserController {
           id, firstName, lastName, email, address, isAdmin, token,
         },
         message: 'User Successfully Created',
+        success: true,
+      });
+    } catch (err) {
+      if (err.name === 'ApiError') {
+        return res.status(err.status).send(
+          { status: err.status, message: err.message, success: err.success },
+        );
+      }
+      return res.status(serverError.status).send(serverError);
+    }
+  }
+
+  static async signin(req, res) {
+    try {
+      const user = User.findByEmail(req.body.email);
+      if (user === null || user === undefined) {
+        throw new ApiError('User Doesn\'t Exist, Check Email', 400);
+      }
+      const { id, password, email } = user;
+      const validPassword = await comparePassword(req.body.password, password);
+      if (!validPassword) {
+        throw new ApiError('Password Invalid', 401);
+      }
+      const token = await generateToken({ id, email });
+      return res.status(200).send({
+        status: 200,
+        data: { ...user, token },
         success: true,
       });
     } catch (err) {

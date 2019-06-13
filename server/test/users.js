@@ -18,6 +18,8 @@ const newUser = {
   password: 'automart1234',
 };
 
+const userProperties = ['id', 'firstName', 'email', 'token', 'lastName', 'address', 'isAdmin'];
+
 describe('User Sign Up', () => {
   it('User should have property firstName, lastName, email, address, password', () => {
     expect(propertyChecker(newUser, 'firstName', 'email', 'password', 'lastName', 'address')).to.equal(true);
@@ -149,14 +151,13 @@ describe('User Sign Up', () => {
       address: 'Magodo Isheri Lagos',
       password: 'automart1234',
     };
-    const properties = ['id', 'firstName', 'email', 'token', 'lastName', 'address', 'isAdmin'];
     request(app)
       .post(`${API_V1_PRFEIX}/user/signup`)
       .send(user)
       .end((err, res) => {
         expect(err).to.equal(null);
         expect(res.status).to.equal(201);
-        expect(propertyChecker(res.body.data, ...properties)).to.equal(true);
+        expect(propertyChecker(res.body.data, ...userProperties)).to.equal(true);
         expect(res.body.data.firstName).to.equal(user.firstName);
         expect(res.body.data.lastName).to.equal(user.lastName);
         expect(res.body.data.email).to.equal(user.email);
@@ -184,6 +185,78 @@ describe('User Sign Up', () => {
         expect(res.body.status).to.equal(400);
         expect(res.body.success).to.equal(false);
         expect(res.body.message).to.equal('Email Already Exists');
+        done();
+      });
+  });
+});
+
+
+describe('User Sign In', () => {
+  it('Should check if the sign in form is valid', () => {
+    const user = {
+      email: 'jimmy@automart.com',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/user/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Invalid SignIn Form');
+      });
+  });
+
+  it('Should check if the email is valid', () => {
+    const user = {
+      email: 'jimmy',
+      password: 'automart1234',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/user/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.status).to.equal(400);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Invalid Email');
+      });
+  });
+
+  it('Should check if the user exists', () => {
+    const user = {
+      email: 'jimmy@notautomart.com',
+      password: 'automart1234',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/user/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.status).to.equal(400);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('User Doesn\'t Exist, Check Email');
+      });
+  });
+
+  it('Should sign in the user', (done) => {
+    const user = {
+      email: 'jimmiabaje@yahoo.com',
+      password: 'automart1234',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/user/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(propertyChecker(res.body.data, ...userProperties)).to.equal(true);
+        expect(res.body.data.firstName).to.be.a('string');
+        expect(res.body.data.lastName).to.be.a('string');
+        expect(res.body.data.email).to.equal(user.email);
+        expect(res.body.data.address).to.be.a('string');
+        expect(res.body.data.isAdmin).to.be.a('boolean');
+        expect(res.body.data.id).to.be.a('number');
+        expect(res.body.data.token).to.be.a('string');
         done();
       });
   });

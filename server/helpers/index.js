@@ -44,6 +44,15 @@ export async function hashPassword(password) {
   }
 }
 
+export async function comparePassword(password, passwordHash) {
+  try {
+    const result = await bcrypt.compare(password, passwordHash);
+    return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
 export async function generateToken(params) {
   try {
     const token = await jwt.sign(params, process.env.SECRET_KEY, { expiresIn: '12h' });
