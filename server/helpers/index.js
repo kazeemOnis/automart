@@ -35,6 +35,12 @@ export const serverError = {
   success: false,
 };
 
+export const authError = {
+  status: 401,
+  message: 'Unauthorizerd Access, Provide Valid Token',
+  success: false,
+};
+
 export async function hashPassword(password) {
   try {
     const hash = await bcrypt.hash(password, 10);
@@ -48,6 +54,15 @@ export async function comparePassword(password, passwordHash) {
   try {
     const result = await bcrypt.compare(password, passwordHash);
     return result;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export async function verifyToken(token) {
+  try {
+    const verify = await jwt.verify(token, process.env.SECRET_KEY);
+    return verify;
   } catch (err) {
     throw err;
   }
