@@ -61,7 +61,7 @@ describe('Create a user to get token', () => {
       password: 'seller1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
         expect(err).to.equal(null);
@@ -83,7 +83,7 @@ describe('Create a user to get token', () => {
       password: 'seller1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signin`)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(200);

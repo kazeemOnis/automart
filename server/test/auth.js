@@ -76,7 +76,7 @@ describe('User Sign Up', () => {
       password: 'automart1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(401);
@@ -95,7 +95,7 @@ describe('User Sign Up', () => {
       address: 'Ikeja Lagos',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -114,7 +114,7 @@ describe('User Sign Up', () => {
       address: 'Asgard',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -133,9 +133,11 @@ describe('User Sign Up', () => {
       address: 'Asgard',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
+        const allUsers = User.getUsers();
+        expect(allUsers.length).to.equal(0);
         expect(res.status).to.equal(400);
         expect(res.body.status).to.equal(400);
         expect(res.body.success).to.equal(false);
@@ -152,12 +154,15 @@ describe('User Sign Up', () => {
       password: 'automart1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
         expect(err).to.equal(null);
         expect(res.status).to.equal(201);
         expect(propertyChecker(res.body.data, ...userProperties)).to.equal(true);
+        const createdUser = User.findById(res.body.data.id);
+        expect(res.body.data.id).to.be.equal(createdUser.id);
+        expect(res.body.data.email).to.be.equal(createdUser.email);
         expect(res.body.data.firstName).to.equal(user.firstName);
         expect(res.body.data.lastName).to.equal(user.lastName);
         expect(res.body.data.email).to.equal(user.email);
@@ -178,7 +183,7 @@ describe('User Sign Up', () => {
       password: 'automart1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signup`)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -197,7 +202,7 @@ describe('User Sign In', () => {
       email: 'jimmy@automart.com',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signin`)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(401);
@@ -213,7 +218,7 @@ describe('User Sign In', () => {
       password: 'automart1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signin`)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -229,7 +234,7 @@ describe('User Sign In', () => {
       password: 'automart1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signin`)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(400);
@@ -239,13 +244,29 @@ describe('User Sign In', () => {
       });
   });
 
+  it('Should check if the password is valid', () => {
+    const user = {
+      email: 'jimmiabaje@yahoo.com',
+      password: 'notautomart1234',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Password Invalid');
+      });
+  });
+
   it('Should sign in the user', (done) => {
     const user = {
       email: 'jimmiabaje@yahoo.com',
       password: 'automart1234',
     };
     request(app)
-      .post(`${API_V1_PRFEIX}/user/signin`)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
       .send(user)
       .end((err, res) => {
         expect(res.status).to.equal(200);
