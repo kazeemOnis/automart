@@ -2,12 +2,10 @@
 import { use, expect, request } from 'chai';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import chaiHttp from 'chai-http';
-import { config } from 'dotenv';
 import app from '../../app';
 import { propertyChecker } from '../helpers/index';
 import User from '../models/userModel';
 
-config();
 use(chaiHttp);
 
 const API_V1_PRFEIX = '/api/v1';

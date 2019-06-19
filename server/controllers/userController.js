@@ -25,7 +25,6 @@ export default class UserController {
         success: true,
       });
     } catch (err) {
-      console.log(err);
       if (err.name === 'ApiError') {
         return res.status(err.status).send(
           { status: err.status, message: err.message, success: err.success },
