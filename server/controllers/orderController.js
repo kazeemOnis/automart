@@ -8,7 +8,7 @@ export default class OrderController {
       if (Car.getCarByID(req.body.car_id) === undefined) {
         throw new ApiError('Car Doesn\'t Exist For Purchase', 400);
       }
-      const ownerCars = Car.gerCarByOwner(req.user.id);
+      const ownerCars = Car.getCarByOwner(req.user.id);
       if (ownerCars.some(car => car.id === req.body.car_id)) {
         throw new ApiError('Cannot Purchase Your Car', 400);
       }

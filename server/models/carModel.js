@@ -20,7 +20,7 @@ export default class Car {
     return cars.find(car => car.id === id);
   }
 
-  static gerCarByOwner(id) {
+  static getCarByOwner(id) {
     return cars.filter(car => car.owner === id);
   }
 }
