@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
 import { v2 } from 'cloudinary';
-import { serverError } from '../helpers';
+import { serverError, ApiError } from '../helpers';
 import Car from '../models/carModel';
 import { dataUri } from '../helpers/multer';
 
@@ -32,6 +32,28 @@ export default class CarController {
         message: 'Car Successfully Created',
       });
     } catch (err) {
+      return res.status(serverError.status).send(serverError);
+    }
+  }
+
+  static get(req, res) {
+    try {
+      const id = parseInt(req.params.car_id, 10);
+      const foundCar = Car.getCarByID(id);
+      if (foundCar === undefined) {
+        throw new ApiError('Cannot Find This Car', 404);
+      }
+      return res.status(200).send({
+        status: 200,
+        data: foundCar,
+        message: 'Car Successfully Found',
+      });
+    } catch (err) {
+      if (err.name === 'ApiError') {
+        return res.status(err.status).send(
+          { status: err.status, message: err.message, success: err.success },
+        );
+      }
       return res.status(serverError.status).send(serverError);
     }
   }

@@ -215,4 +215,33 @@ describe('Create a car ad', () => {
   });
 });
 
+describe('View a car', () => {
+  it('Cannot view a car that does not exist', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car/20`)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body.status).to.equal(404);
+        expect(res.body.message).to.equal('Cannot Find This Car');
+        expect(res.body.success).to.equal(false);
+      });
+  });
+
+  it('Should return all information about car', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car/1`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        const foundCar = Car.getCarByID(res.body.data.id);
+        expect(foundCar).to.not.equal(null);
+        expect(foundCar.state).to.equal(res.body.data.state);
+        expect(foundCar.manufacturer).to.equal(res.body.data.manufacturer);
+        expect(foundCar.model).to.equal(res.body.data.model);
+        expect(foundCar.description).to.equal(res.body.data.description);
+        expect(foundCar.price).to.equal(res.body.data.price);
+      });
+  });
+});
+
 export default authHeader;
