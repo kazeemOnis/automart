@@ -1,5 +1,5 @@
 import {
-  propertyChecker, ApiError, serverError, regexChecker,
+  propertyChecker, ApiError, regexChecker,
 } from '../helpers';
 
 const priceRegex = /^[\d]+$/;
@@ -20,12 +20,9 @@ export default class CarValidation {
       }
       return next();
     } catch (err) {
-      if (err.name === 'ApiError') {
-        return res.status(err.status).send(
-          { status: err.status, message: err.message, success: err.success },
-        );
-      }
-      return res.status(serverError.status).send(serverError);
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
     }
   }
 }

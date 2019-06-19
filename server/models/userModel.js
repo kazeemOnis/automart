@@ -1,37 +1,30 @@
 const users = [];
-class User {
-  constructor() {
-    this.users = users;
+export default class User {
+  static generateID() {
+    return users.length + 1;
   }
 
-  generateID() {
-    return this.users.length + 1;
-  }
-
-  createUser(user) {
+  static createUser(user) {
     const newUser = {
-      id: this.generateID(), ...user, isAdmin: false, creadetAt: Date.now(),
+      id: User.generateID(), ...user, isAdmin: false, creadetAt: Date.now(),
     };
-    this.users.push(newUser);
+    users.push(newUser);
     return newUser;
   }
 
-  getUsers() {
-    return this.users;
+  static getUsers() {
+    return users;
   }
 
-  findById(id) {
-    return this.users.find(user => user.id === id);
+  static findById(id) {
+    return users.find(user => user.id === id);
   }
 
-  findByEmail(email) {
-    return this.users.find(user => user.email === email);
+  static findByEmail(email) {
+    return users.find(user => user.email === email);
   }
 
-  checkEmailExist(email) {
-    return this.users.some(user => user.email === email);
+  static checkEmailExist(email) {
+    return users.some(user => user.email === email);
   }
 }
-
-
-export default new User();

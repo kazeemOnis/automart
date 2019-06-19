@@ -1,5 +1,5 @@
 import {
-  propertyChecker, ApiError, serverError, regexChecker,
+  propertyChecker, ApiError, regexChecker,
 } from '../helpers/index';
 
 const nameRegex = /[a-zA-z]+/;
@@ -28,12 +28,9 @@ export default class UserValidation {
       }
       return next();
     } catch (err) {
-      if (err.name === 'ApiError') {
-        return res.status(err.status).send(
-          { status: err.status, message: err.message, success: err.success },
-        );
-      }
-      return res.status(serverError.status).send(serverError);
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
     }
   }
 
@@ -50,12 +47,9 @@ export default class UserValidation {
       }
       return next();
     } catch (err) {
-      if (err.name === 'ApiError') {
-        return res.status(err.status).send(
-          { status: err.status, message: err.message, success: err.success },
-        );
-      }
-      return res.status(serverError.status).send(serverError);
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
     }
   }
 }
