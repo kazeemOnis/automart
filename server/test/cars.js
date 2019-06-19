@@ -4,6 +4,7 @@ import { use, expect, request } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
 import Car from '../models/carModel';
+import userAuth from './auth';
 
 use(chaiHttp);
 
@@ -13,16 +14,13 @@ const newCar = {
   state: 'used',
   status: 'available',
   price: 2000000,
-  manufacturer: 'Toyota',
-  model: 'camry',
+  manufacturer: 'Honda',
+  model: 'Accord',
   body_type: 'sedan',
   year: '2006',
   description: 'Chiiled AC, fast engine',
 };
 
-// describe('Create a user to get token', () => {
-
-// });
 
 describe('Unauthorized users shouldn\'t be able to create car ads', () => {
   it('Unauthorized user should be denied', () => {
@@ -184,8 +182,8 @@ describe('Create a car ad', () => {
       .set(authHeader)
       .send(car)
       .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body.status).to.equal(200);
+        expect(res.status).to.equal(201);
+        expect(res.body.status).to.equal(201);
         expect(Car.getCars()).to.not.equal([]);
         const createdCar = Car.getCarByID(res.body.data.id);
         expect(createdCar).to.not.equal(null);
@@ -196,4 +194,25 @@ describe('Create a car ad', () => {
         expect(createdCar.price).to.equal(car.price);
       });
   });
+
+  it('Should create a new car', () => {
+    request(app)
+      .post(`${API_V1_PRFEIX}/car`)
+      .set(userAuth)
+      .send(newCar)
+      .end((err, res) => {
+        expect(res.status).to.equal(201);
+        expect(res.body.status).to.equal(201);
+        expect(Car.getCars()).to.not.equal([]);
+        const createdCar = Car.getCarByID(res.body.data.id);
+        expect(createdCar).to.not.equal(null);
+        expect(createdCar.state).to.equal(newCar.state);
+        expect(createdCar.manufacturer).to.equal(newCar.manufacturer);
+        expect(createdCar.model).to.equal(newCar.model);
+        expect(createdCar.description).to.equal(newCar.description);
+        expect(createdCar.price).to.equal(newCar.price);
+      });
+  });
 });
+
+export default authHeader;
