@@ -40,7 +40,9 @@ export default class UserController {
       if (user === null || user === undefined) {
         throw new ApiError('User Doesn\'t Exist, Check Email', 400);
       }
-      const { id, password, email } = user;
+      const {
+        id, password, email, firstName, lastName, isAdmin, address,
+      } = user;
       const validPassword = await comparePassword(req.body.password, password);
       if (!validPassword) {
         throw new ApiError('Password Invalid', 401);
@@ -48,7 +50,9 @@ export default class UserController {
       const token = await generateToken({ id, email });
       return res.status(200).send({
         status: 200,
-        data: { ...user, token },
+        data: {
+          id, firstName, lastName, email, address, isAdmin, token,
+        },
         success: true,
       });
     } catch (err) {

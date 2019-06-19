@@ -26,8 +26,8 @@ export default class CarController {
         req.body.images = images;
       }
       const newCar = Car.createCar(req.body);
-      return res.status(200).send({
-        status: 200,
+      return res.status(201).send({
+        status: 201,
         data: newCar,
         message: 'Car Successfully Created',
       });

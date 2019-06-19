@@ -18,6 +18,8 @@ const newUser = {
   password: 'automart1234',
 };
 
+const userAuth = { authorization: null };
+
 const userProperties = ['id', 'firstName', 'email', 'token', 'lastName', 'address', 'isAdmin'];
 
 describe('User Sign Up', () => {
@@ -28,45 +30,6 @@ describe('User Sign Up', () => {
   it('User should have not unwanted property', () => {
     expect(propertyChecker(newUser, 'username', 'name', 'hackUser')).to.equal(false);
   });
-
-  // it('Should create a new user', () => {
-  //   const createdUser = User.createUser(newUser);
-  //   const allUsers = User.getUsers();
-  //   expect(allUsers.length).to.not.equal(0);
-  //   expect(createdUser.firstName).to.equal(newUser.firstName);
-  //   expect(createdUser.lastName).to.equal(newUser.lastName);
-  //   expect(createdUser.address).to.equal(newUser.address);
-  //   expect(createdUser.password).to.equal(newUser.password);
-  //   expect(createdUser.email).to.equal(newUser.email);
-  //   expect(createdUser.id).to.be.a('number');
-  // });
-
-  // it('Should find a user by id', () => {
-  //   const foundUser = User.findById(1);
-  //   expect(foundUser.firstName).to.equal(newUser.firstName);
-  //   expect(foundUser.lastName).to.equal(newUser.lastName);
-  //   expect(foundUser.address).to.equal(newUser.address);
-  //   expect(foundUser.password).to.equal(newUser.password);
-  //   expect(foundUser.email).to.equal(newUser.email);
-  //   expect(foundUser.id).to.equal(1);
-  // });
-
-  // it('Should find a user by email', () => {
-  //   const foundUser = User.findByEmail('konisarotu@yahoo.com');
-  //   expect(foundUser.firstName).to.equal(newUser.firstName);
-  //   expect(foundUser.lastName).to.equal(newUser.lastName);
-  //   expect(foundUser.address).to.equal(newUser.address);
-  //   expect(foundUser.password).to.equal(newUser.password);
-  //   expect(foundUser.email).to.equal(newUser.email);
-  //   expect(foundUser.id).to.equal(1);
-  // });
-
-  // it('Check if email exists', () => {
-  //   const foundEmail = User.checkEmailExist('testemail@automart.com');
-  //   const foundEmail2 = User.checkEmailExist('konisarotu@yahoo.com');
-  //   expect(foundEmail).to.equal(false);
-  //   expect(foundEmail2).to.equal(true);
-  // });
 
   it('Should check if signup form is valid', () => {
     const user = {
@@ -278,7 +241,10 @@ describe('User Sign In', () => {
         expect(res.body.data.isAdmin).to.be.a('boolean');
         expect(res.body.data.id).to.be.a('number');
         expect(res.body.data.token).to.be.a('string');
+        userAuth.authorization = `Bearer ${res.body.data.token}`;
         done();
       });
   });
 });
+
+export default userAuth;
