@@ -7,5 +7,6 @@ import OrderController from '../controllers/orderController';
 const orderRoutes = Router();
 
 orderRoutes.post('/', AuthValidation.authorizeUser, OrdrerValidation.validateOrder, OrderController.create);
+orderRoutes.patch('/:order_id/price', AuthValidation.authorizeUser, OrdrerValidation.validatePriceUpdate, OrderController.updatePrice);
 
 export default orderRoutes;

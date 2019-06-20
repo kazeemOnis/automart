@@ -19,4 +19,21 @@ export default class OrdrerValidation {
       );
     }
   }
+
+  static validatePriceUpdate(req, res, next) {
+    try {
+      const updateParamter = ['amount'];
+      if (!propertyChecker(req.body, ...updateParamter)) {
+        throw new ApiError('Invalid Update Form', 400);
+      }
+      if (!regexChecker(amountRegex, req.body.amount)) {
+        throw new ApiError('Invalid Amount, Please Enter Numbers Only', 400);
+      }
+      return next();
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
 }

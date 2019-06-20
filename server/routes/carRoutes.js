@@ -8,4 +8,5 @@ const carRoutes = Router();
 
 carRoutes.post('/', upload, AuthValidation.authorizeUser, CarValidation.validateCar, CarController.create);
 carRoutes.get('/:car_id', CarController.get);
+
 export default carRoutes;
