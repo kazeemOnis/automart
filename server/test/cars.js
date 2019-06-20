@@ -244,4 +244,84 @@ describe('View a car', () => {
   });
 });
 
+describe('Mark car as sold', () => {
+  it('Should not allow unauthorized users', () => {
+    request(app)
+      .patch(`${API_V1_PRFEIX}/car/1/status`)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Unauthorizerd Access, Provide Valid Token');
+      });
+  });
+
+  it('User should provide a token', () => {
+    request(app)
+      .patch(`${API_V1_PRFEIX}/car/1/status`)
+      .set({ authorization: null })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('No Authorization Token Provided');
+      });
+  });
+
+  it('Cannot sell car that does not exist', () => {
+    request(app)
+      .patch(`${API_V1_PRFEIX}/car/20/status`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.status).to.equal(400);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Car Doesn\'t Exist');
+      });
+  });
+
+  it('Only owner can sell car', () => {
+    request(app)
+      .patch(`${API_V1_PRFEIX}/car/2/status`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Only The Actual Seller Can Sell');
+      });
+  });
+
+  it('Mark car as sold', () => {
+    request(app)
+      .patch(`${API_V1_PRFEIX}/car/1/status`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        const foundCar = Car.getCarByID(res.body.data.id);
+        expect(foundCar).to.not.equal(null);
+        expect(foundCar.state).to.equal(res.body.data.state);
+        expect(foundCar.manufacturer).to.equal(res.body.data.manufacturer);
+        expect(foundCar.model).to.equal(res.body.data.model);
+        expect(foundCar.description).to.equal(res.body.data.description);
+        expect(foundCar.price).to.equal(res.body.data.price);
+        expect(foundCar.status).to.equal('sold');
+        expect(res.body.data.status).to.equal('sold');
+      });
+  });
+
+  it('Car already sold', () => {
+    request(app)
+      .patch(`${API_V1_PRFEIX}/car/1/status`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.status).to.equal(400);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Car Already Sold');
+      });
+  });
+});
+
 export default authHeader;
