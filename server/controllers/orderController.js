@@ -31,8 +31,8 @@ export default class OrderController {
       const { id: buyer } = req.user;
       const id = parseInt(req.params.order_id, 10);
       const order = Order.findById(id);
-      const orderCopy = { ...order };
-      const { amount: oldAmount, status } = orderCopy;
+      const data = { ...order };
+      const { amount: oldAmount, status } = data;
       const { amount: newAmount } = req.body;
       if (order === undefined) {
         throw new ApiError('Order Doesn\'t Exist For Update', 400);
@@ -44,12 +44,12 @@ export default class OrderController {
         throw new ApiError('Only Pending Orders Can be Updated', 400);
       }
       const message = Order.updatePrice(id, newAmount);
-      orderCopy.oldPriceOffered = oldAmount;
-      orderCopy.newPriceOffered = newAmount;
-      delete orderCopy.amount;
+      data.oldPriceOffered = oldAmount;
+      data.newPriceOffered = newAmount;
+      delete data.amount;
       return res.status(200).send({
         status: 200,
-        data: orderCopy,
+        data,
         success: true,
         message,
       });

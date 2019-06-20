@@ -20,6 +20,14 @@ export default class Car {
     return cars.find(car => car.id === id);
   }
 
+  static sellCar(id) {
+    const car = Car.getCarByID(id);
+    const carIndex = cars.findIndex(data => data === car);
+    car.status = 'sold';
+    cars[carIndex] = car;
+    return car;
+  }
+
   static getCarByOwner(id) {
     return cars.filter(car => car.owner === id);
   }

@@ -25,10 +25,10 @@ export default class CarController {
         const images = await Promise.all(files);
         req.body.images = images;
       }
-      const newCar = Car.createCar(req.body);
+      const data = Car.createCar(req.body);
       return res.status(201).send({
         status: 201,
-        data: newCar,
+        data,
         message: 'Car Successfully Created',
       });
     } catch (err) {
@@ -39,13 +39,13 @@ export default class CarController {
   static get(req, res) {
     try {
       const id = parseInt(req.params.car_id, 10);
-      const foundCar = Car.getCarByID(id);
-      if (foundCar === undefined) {
+      const data = Car.getCarByID(id);
+      if (data === undefined) {
         throw new ApiError('Cannot Find This Car', 404);
       }
       return res.status(200).send({
         status: 200,
-        data: foundCar,
+        data,
         message: 'Car Successfully Found',
       });
     } catch (err) {
@@ -55,6 +55,33 @@ export default class CarController {
         );
       }
       return res.status(serverError.status).send(serverError);
+    }
+  }
+
+  static sell(req, res) {
+    try {
+      const { id: user } = req.user;
+      const id = parseInt(req.params.car_id, 10);
+      const data = Car.getCarByID(id);
+      if (data === undefined) {
+        throw new ApiError('Car Doesn\'t Exist', 400);
+      }
+      if (data.owner !== user) {
+        throw new ApiError('Only The Actual Seller Can Sell', 401);
+      }
+      if (data.status === 'sold') {
+        throw new ApiError('Car Already Sold', 400);
+      }
+      const car = Car.sellCar(data.id);
+      return res.status(200).send({
+        status: 200,
+        data: car,
+        message: 'Car Successfully Found',
+      });
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
     }
   }
 }
