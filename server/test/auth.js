@@ -19,8 +19,9 @@ const newUser = {
 };
 
 const userAuth = { authorization: null };
+const adminAuth = { authorization: null };
 
-const userProperties = ['id', 'firstName', 'email', 'token', 'lastName', 'address', 'isAdmin'];
+const userProperties = ['id', 'firstName', 'email', 'token', 'lastName', 'address'];
 
 describe('User Sign Up', () => {
   it('User should have property firstName, lastName, email, address, password', () => {
@@ -130,9 +131,37 @@ describe('User Sign Up', () => {
         expect(res.body.data.lastName).to.equal(user.lastName);
         expect(res.body.data.email).to.equal(user.email);
         expect(res.body.data.address).to.equal(user.address);
-        expect(res.body.data.isAdmin).to.be.a('boolean');
         expect(res.body.data.id).to.be.a('number');
         expect(res.body.data.token).to.be.a('string');
+        done();
+      });
+  });
+
+  it('Should sign up a new user', (done) => {
+    const user = {
+      firstName: 'Automart',
+      lastName: 'Admin',
+      email: 'admin@automart.com',
+      address: 'Magodo Isheri Lagos',
+      password: 'automart1234',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/auth/signup`)
+      .send(user)
+      .end((err, res) => {
+        expect(err).to.equal(null);
+        expect(res.status).to.equal(201);
+        expect(propertyChecker(res.body.data, ...userProperties)).to.equal(true);
+        const createdUser = User.findById(res.body.data.id);
+        expect(res.body.data.id).to.be.equal(createdUser.id);
+        expect(res.body.data.email).to.be.equal(createdUser.email);
+        expect(res.body.data.firstName).to.equal(user.firstName);
+        expect(res.body.data.lastName).to.equal(user.lastName);
+        expect(res.body.data.email).to.equal(user.email);
+        expect(res.body.data.address).to.equal(user.address);
+        expect(res.body.data.id).to.be.a('number');
+        expect(res.body.data.token).to.be.a('string');
+        User.makeadmin(createdUser.id);
         done();
       });
   });
@@ -238,13 +267,34 @@ describe('User Sign In', () => {
         expect(res.body.data.lastName).to.be.a('string');
         expect(res.body.data.email).to.equal(user.email);
         expect(res.body.data.address).to.be.a('string');
-        expect(res.body.data.isAdmin).to.be.a('boolean');
         expect(res.body.data.id).to.be.a('number');
         expect(res.body.data.token).to.be.a('string');
         userAuth.authorization = `Bearer ${res.body.data.token}`;
         done();
       });
   });
+
+  it('Should sign in the user', (done) => {
+    const user = {
+      email: 'admin@automart.com',
+      password: 'automart1234',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/auth/signin`)
+      .send(user)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(propertyChecker(res.body.data, ...userProperties)).to.equal(true);
+        expect(res.body.data.firstName).to.be.a('string');
+        expect(res.body.data.lastName).to.be.a('string');
+        expect(res.body.data.email).to.equal(user.email);
+        expect(res.body.data.address).to.be.a('string');
+        expect(res.body.data.id).to.be.a('number');
+        expect(res.body.data.token).to.be.a('string');
+        adminAuth.authorization = `Bearer ${res.body.data.token}`;
+        done();
+      });
+  });
 });
 
-export default userAuth;
+export { userAuth, adminAuth };

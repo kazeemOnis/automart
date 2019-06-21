@@ -15,11 +15,11 @@ export default class UserController {
       const {
         id, email, firstName, lastName, address, isAdmin,
       } = user;
-      const token = await generateToken({ id, email });
+      const token = await generateToken({ id, email, isAdmin });
       return res.status(201).send({
         status: 201,
         data: {
-          id, firstName, lastName, email, address, isAdmin, token,
+          id, firstName, lastName, email, address, token,
         },
         message: 'User Successfully Created',
         success: true,
@@ -44,11 +44,11 @@ export default class UserController {
       if (!validPassword) {
         throw new ApiError('Password Invalid', 401);
       }
-      const token = await generateToken({ id, email });
+      const token = await generateToken({ id, email, isAdmin });
       return res.status(200).send({
         status: 200,
         data: {
-          id, firstName, lastName, email, address, isAdmin, token,
+          id, firstName, lastName, email, address, token,
         },
         success: true,
       });

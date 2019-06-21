@@ -2,7 +2,7 @@ const orders = [
   {
     id: 1,
     car_id: 2,
-    buyer: 2,
+    buyer: 3,
     amount: 10000,
     status: 'rejected',
     created_on: Date.now(),
@@ -10,7 +10,7 @@ const orders = [
   {
     id: 2,
     car_id: 2,
-    buyer: 3,
+    buyer: 4,
     amount: 10000,
     status: 'rejected',
     created_on: Date.now(),

@@ -135,4 +135,23 @@ export default class CarController {
       return res.status(serverError.status).send(serverError);
     }
   }
+
+  static deleteCar(req, res) {
+    try {
+      const id = parseInt(req.params.car_id, 10);
+      const car = Car.getCarByID(id);
+      if (car === undefined) {
+        throw new ApiError('Car Doesn\'t Exist', 400);
+      }
+      const data = Car.deleteCar(id);
+      return res.status(200).send({
+        status: 200,
+        data,
+      });
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
 }

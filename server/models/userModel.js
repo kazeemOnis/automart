@@ -24,6 +24,15 @@ export default class User {
     return users.find(user => user.email === email);
   }
 
+  static makeadmin(id) {
+    const user = User.findById(id);
+    const userIndex = users.findIndex(data => data === user);
+    user.isAdmin = true;
+    users[userIndex] = user;
+    return user;
+  }
+
+
   static checkEmailExist(email) {
     return users.some(user => user.email === email);
   }
