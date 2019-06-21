@@ -26,6 +26,23 @@ export default class CarValidation {
     }
   }
 
+  static validatePriceUpdate(req, res, next) {
+    try {
+      const updateParamter = ['price'];
+      if (!propertyChecker(req.body, ...updateParamter)) {
+        throw new ApiError('Invalid Update Form', 400);
+      }
+      if (!regexChecker(priceRegex, req.body.price)) {
+        throw new ApiError('Invalid Price, Please Enter Numbers Only', 400);
+      }
+      return next();
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
+
   static validateQuery(req, res, next) {
     try {
       let result;

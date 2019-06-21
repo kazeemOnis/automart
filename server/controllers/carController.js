@@ -73,7 +73,32 @@ export default class CarController {
       return res.status(200).send({
         status: 200,
         data: car,
-        message: 'Car Successfully Found',
+        message: 'Car Successfully Sold',
+      });
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
+
+  static updatePrice(req, res) {
+    try {
+      const { id: user } = req.user;
+      const id = parseInt(req.params.car_id, 10);
+      const data = Car.getCarByID(id);
+      const { price } = req.body;
+      if (data === undefined) {
+        throw new ApiError('Car Doesn\'t Exist', 400);
+      }
+      if (data.owner !== user) {
+        throw new ApiError('Only The Actual Seller Can Update Price', 401);
+      }
+      const car = Car.updatePrice(data.id, price);
+      return res.status(200).send({
+        status: 200,
+        data: car,
+        message: 'Car Price Successfully Updated',
       });
     } catch (err) {
       return res.status(err.status).send(
