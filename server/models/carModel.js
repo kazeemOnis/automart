@@ -28,6 +28,14 @@ export default class Car {
     return car;
   }
 
+  static updatePrice(id, price) {
+    const car = Car.getCarByID(id);
+    const carIndex = cars.findIndex(data => data === car);
+    car.price = price;
+    cars[carIndex] = car;
+    return car;
+  }
+
   static getCarByOwner(id) {
     return cars.filter(car => car.owner === id);
   }
