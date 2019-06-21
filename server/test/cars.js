@@ -424,4 +424,83 @@ describe('Update car price', () => {
   });
 });
 
+describe('View all unsold cars', () => {
+  it('Should not allow invalid query parameters', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available&model=Accord&price=1000`)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Invalid Query');
+      });
+  });
+
+  it('Should view all available car', () => {
+    let cars = Car.getCars();
+    cars = Car.filter(cars, 'status', 'available');
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available`)
+      .end((err, res) => {
+        expect(res.body.data.length).to.equal(cars.length);
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.message).to.equal('Cars Successfully Filtered');
+      });
+  });
+
+  it('Should view all available accord cars cars', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available&model=Accord`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.message).to.equal('Cars Successfully Filtered');
+      });
+  });
+
+  it('Should view all unsold toyota cars', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available&manufacturer=Toyota`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.message).to.equal('Cars Successfully Filtered');
+      });
+  });
+
+  it('Should view all unsold tousedyota cars', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available&state=used`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.message).to.equal('Cars Successfully Filtered');
+      });
+  });
+
+  it('should view all unsold cars from 1mil to 3mil', () => {
+    let cars = Car.getCars();
+    cars = Car.filter(cars, 'status', 'available');
+    cars = Car.filterPrice(cars, 1000000, 3000000);
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available&min_price=1000000&max_price=3000000`)
+      .end((err, res) => {
+        expect(res.body.data.length).to.equal(cars.length);
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.message).to.equal('Cars Successfully Filtered');
+      });
+  });
+
+  it('should view all unsold cars from 3m to 4m', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car?status=available&min_price=3000000&max_price=4000000`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.message).to.equal('Cars Successfully Filtered');
+      });
+  });
+});
+
 export default authHeader;

@@ -42,4 +42,29 @@ export default class CarValidation {
       );
     }
   }
+
+  static validateQuery(req, res, next) {
+    try {
+      let result;
+      const queryParameters = ['status', 'body_type', 'state', 'manufacturer', 'model', 'year', 'min_price', 'max_price'];
+      const keys = Object.keys(req.query);
+      for (let i = 0; i < keys.length; i += 1) {
+        result = false;
+        for (let j = 0; j < queryParameters.length; j += 1) {
+          if (keys[i] === queryParameters[j]) {
+            result = true;
+            break;
+          }
+        }
+      }
+      if (result === false) {
+        throw new ApiError('Invalid Query', 400);
+      }
+      return next();
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
 }

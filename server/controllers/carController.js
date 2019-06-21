@@ -36,7 +36,7 @@ export default class CarController {
     }
   }
 
-  static get(req, res) {
+  static getCar(req, res) {
     try {
       const id = parseInt(req.params.car_id, 10);
       const data = Car.getCarByID(id);
@@ -49,12 +49,9 @@ export default class CarController {
         message: 'Car Successfully Found',
       });
     } catch (err) {
-      if (err.name === 'ApiError') {
-        return res.status(err.status).send(
-          { status: err.status, message: err.message, success: err.success },
-        );
-      }
-      return res.status(serverError.status).send(serverError);
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
     }
   }
 
@@ -107,6 +104,35 @@ export default class CarController {
       return res.status(err.status).send(
         { status: err.status, message: err.message, success: err.success },
       );
+    }
+  }
+
+  static filter(req, res) {
+    try {
+      let data = Car.getCars();
+      const { query } = req;
+      const minPrice = parseInt(query.min_price, 10);
+      const maxPrice = parseInt(query.max_price, 10);
+      const keys = Object.keys(query);
+      let filterPrice = false;
+      for (let i = 0; i < keys.length; i += 1) {
+        const key = keys[i];
+        if (filterPrice) {
+          break;
+        } else if (key === 'min_price' || key === 'max_price') {
+          data = Car.filterPrice(data, minPrice, maxPrice);
+          filterPrice = true;
+        } else {
+          data = Car.filter(data, key, query[key]);
+        }
+      }
+      return res.status(200).send({
+        status: 200,
+        data,
+        message: 'Cars Successfully Filtered',
+      });
+    } catch (err) {
+      return res.status(serverError.status).send(serverError);
     }
   }
 }
