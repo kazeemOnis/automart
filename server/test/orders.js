@@ -32,7 +32,7 @@ describe('Unauthorized users shouldn\'t be able to purchase', () => {
 
   it('User should provide a token', () => {
     request(app)
-      .post(`${API_V1_PRFEIX}/car`)
+      .post(`${API_V1_PRFEIX}/order`)
       .set({ authorization: null })
       .send(newOrder)
       .end((err, res) => {

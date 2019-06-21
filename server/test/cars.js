@@ -4,7 +4,7 @@ import { use, expect, request } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
 import Car from '../models/carModel';
-import userAuth from './auth';
+import { userAuth, adminAuth } from './auth';
 
 use(chaiHttp);
 
@@ -69,7 +69,6 @@ describe('Create a user to get token', () => {
         expect(res.body.data.lastName).to.equal(user.lastName);
         expect(res.body.data.email).to.equal(user.email);
         expect(res.body.data.address).to.equal(user.address);
-        expect(res.body.data.isAdmin).to.be.a('boolean');
         expect(res.body.data.id).to.be.a('number');
         expect(res.body.data.token).to.be.a('string');
         done();
@@ -90,7 +89,6 @@ describe('Create a user to get token', () => {
         expect(res.body.data.lastName).to.be.a('string');
         expect(res.body.data.email).to.equal(user.email);
         expect(res.body.data.address).to.be.a('string');
-        expect(res.body.data.isAdmin).to.be.a('boolean');
         expect(res.body.data.id).to.be.a('number');
         expect(res.body.data.token).to.be.a('string');
         authHeader.authorization = `Bearer ${res.body.data.token}`;
@@ -212,6 +210,35 @@ describe('Create a car ad', () => {
         expect(createdCar.model).to.equal(newCar.model);
         expect(createdCar.description).to.equal(newCar.description);
         expect(createdCar.price).to.equal(newCar.price);
+      });
+  });
+
+  it('Should create a new car', () => {
+    const car = {
+      state: 'used',
+      status: 'available',
+      price: 1000,
+      manufacturer: 'Mercedes',
+      model: 'c300',
+      body_type: 'sport',
+      year: 2016,
+      description: 'Fast Engine, clean and calm affordable rate',
+    };
+    request(app)
+      .post(`${API_V1_PRFEIX}/car`)
+      .set(authHeader)
+      .send(car)
+      .end((err, res) => {
+        expect(res.status).to.equal(201);
+        expect(res.body.status).to.equal(201);
+        expect(Car.getCars()).to.not.equal([]);
+        const createdCar = Car.getCarByID(res.body.data.id);
+        expect(createdCar).to.not.equal(null);
+        expect(createdCar.state).to.equal(car.state);
+        expect(createdCar.manufacturer).to.equal(car.manufacturer);
+        expect(createdCar.model).to.equal(car.model);
+        expect(createdCar.description).to.equal(car.description);
+        expect(createdCar.price).to.equal(car.price);
       });
   });
 });
@@ -478,7 +505,7 @@ describe('View all unsold cars', () => {
       });
   });
 
-  it('should view all unsold cars from 1mil to 3mil', () => {
+  it('Should view all unsold cars from 1mil to 3mil', () => {
     let cars = Car.getCars();
     cars = Car.filter(cars, 'status', 'available');
     cars = Car.filterPrice(cars, 1000000, 3000000);
@@ -492,7 +519,7 @@ describe('View all unsold cars', () => {
       });
   });
 
-  it('should view all unsold cars from 3m to 4m', () => {
+  it('Should view all unsold cars from 3m to 4m', () => {
     request(app)
       .get(`${API_V1_PRFEIX}/car?status=available&min_price=3000000&max_price=4000000`)
       .end((err, res) => {
@@ -503,4 +530,61 @@ describe('View all unsold cars', () => {
   });
 });
 
+describe('Admin should delete car ad', () => {
+  it('Should not allow unauthorized users', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/car/3`)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Unauthorizerd Access, Provide Valid Token');
+      });
+  });
+
+  it('User should provide a token', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/car/3`)
+      .set({ authorization: null })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('No Authorization Token Provided');
+      });
+  });
+
+  it('Only admin can delete car ad', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/car/3`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.message).to.equal('Only Admin Has Access');
+      });
+  });
+
+  it('Should delete car ad', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/car/3`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.data).to.equal('Car Ad Successfully Deleted');
+      });
+  });
+
+  it('Cannot delete ad that doesn\'t exist', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/car/3`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(400);
+        expect(res.body.status).to.equal(400);
+        expect(res.body.message).to.equal('Car Doesn\'t Exist');
+      });
+  });
+});
 export default authHeader;

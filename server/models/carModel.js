@@ -36,6 +36,12 @@ export default class Car {
     return car;
   }
 
+  static deleteCar(id) {
+    const car = Car.getCarByID(id);
+    cars.splice(cars.indexOf(car), 1);
+    return 'Car Ad Successfully Deleted';
+  }
+
   static filter(data, field, value) {
     return data.filter(car => car[field] === value);
   }

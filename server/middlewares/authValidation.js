@@ -19,4 +19,17 @@ export default class AuthValidation {
       return res.status(authError.status).send(authError);
     }
   }
+
+  static authorizeAdmin(req, res, next) {
+    try {
+      if (!req.user.isAdmin) {
+        throw new ApiError('Only Admin Has Access', 401);
+      }
+      return next();
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
 }
