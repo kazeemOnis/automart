@@ -28,6 +28,14 @@ export default class Car {
     return car;
   }
 
+  static filter(data, field, value) {
+    return data.filter(car => car[field] === value);
+  }
+
+  static filterPrice(data, min = 0, max = 0) {
+    return data.filter(car => (car.price >= min) && (car.price <= max));
+  }
+
   static getCarByOwner(id) {
     return cars.filter(car => car.owner === id);
   }

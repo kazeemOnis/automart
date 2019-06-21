@@ -7,7 +7,8 @@ import { upload } from '../helpers/multer';
 const carRoutes = Router();
 
 carRoutes.post('/', upload, AuthValidation.authorizeUser, CarValidation.validateCar, CarController.create);
-carRoutes.get('/:car_id', CarController.get);
+carRoutes.get('/:car_id', CarController.getCar);
+carRoutes.get('', CarValidation.validateQuery, CarController.filter);
 carRoutes.patch('/:car_id/status', AuthValidation.authorizeUser, CarController.sell);
 
 export default carRoutes;
