@@ -4,6 +4,8 @@ import { use, expect, request } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../app';
 import Flag from '../models/flagModel';
+import { adminAuth } from './auth';
+import authHeader from './cars';
 
 use(chaiHttp);
 
@@ -47,6 +49,53 @@ describe('Create a flag for a car ad', () => {
         expect(newFlag.car_id).to.equal(res.body.data.car_id);
         expect(newFlag.reason).to.equal(res.body.data.reason);
         expect(newFlag.description).to.equal(res.body.data.description);
+      });
+  });
+});
+
+describe('Admin view all flags', () => {
+  it('Should not allow unauthorized users', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/`)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Unauthorizerd Access, Provide Valid Token');
+      });
+  });
+
+  it('User should provide a token', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/`)
+      .set({ authorization: null })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('No Authorization Token Provided');
+      });
+  });
+
+  it('Only admin can view all flags', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.message).to.equal('Only Admin Has Access');
+      });
+  });
+
+  it('Admin can view all flags', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.success).to.equal(true);
       });
   });
 });
