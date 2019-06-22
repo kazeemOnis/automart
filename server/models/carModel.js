@@ -43,6 +43,7 @@ export default class Car {
   }
 
   static filter(data, field, value) {
+    console.log('filtering');
     return data.filter(car => car[field] === value);
   }
 

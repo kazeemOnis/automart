@@ -45,7 +45,7 @@ export default class CarValidation {
 
   static validateQuery(req, res, next) {
     try {
-      let result;
+      let result = true;
       const queryParameters = ['status', 'body_type', 'state', 'manufacturer', 'model', 'year', 'min_price', 'max_price'];
       const keys = Object.keys(req.query);
       for (let i = 0; i < keys.length; i += 1) {
