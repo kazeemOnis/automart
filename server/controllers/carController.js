@@ -38,6 +38,7 @@ export default class CarController {
 
   static getCar(req, res) {
     try {
+      console.log(req.params);
       const id = parseInt(req.params.car_id, 10);
       const data = Car.getCarByID(id);
       if (data === undefined) {
@@ -129,7 +130,7 @@ export default class CarController {
       return res.status(200).send({
         status: 200,
         data,
-        message: 'Cars Successfully Filtered',
+        success: true,
       });
     } catch (err) {
       return res.status(serverError.status).send(serverError);
@@ -147,6 +148,7 @@ export default class CarController {
       return res.status(200).send({
         status: 200,
         data,
+        success: true,
       });
     } catch (err) {
       return res.status(err.status).send(
