@@ -38,7 +38,6 @@ export default class CarController {
 
   static getCar(req, res) {
     try {
-      console.log(req.params);
       const id = parseInt(req.params.car_id, 10);
       const data = Car.getCarByID(id);
       if (data === undefined) {

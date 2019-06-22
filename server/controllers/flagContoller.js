@@ -14,4 +14,17 @@ export default class FlagController {
       return res.status(serverError.status).send(serverError);
     }
   }
+
+  static getAll(req, res) {
+    try {
+      const data = Flag.getFlags();
+      return res.status(200).send({
+        status: 200,
+        data,
+        success: true,
+      });
+    } catch (err) {
+      return res.status(serverError.status).send(serverError);
+    }
+  }
 }
