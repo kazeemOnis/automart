@@ -18,6 +18,7 @@ export default class OrderController {
         status: 201,
         data,
         message: 'Purchase Order Successfully Created',
+        success: true,
       });
     } catch (err) {
       return res.status(err.status).send(
@@ -50,8 +51,8 @@ export default class OrderController {
       return res.status(200).send({
         status: 200,
         data,
-        success: true,
         message,
+        success: true,
       });
     } catch (err) {
       return res.status(err.status).send(

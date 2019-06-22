@@ -471,7 +471,6 @@ describe('View all unsold cars', () => {
         expect(res.body.data.length).to.equal(cars.length);
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal(200);
-        expect(res.body.message).to.equal('Cars Successfully Filtered');
       });
   });
 
@@ -481,7 +480,6 @@ describe('View all unsold cars', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal(200);
-        expect(res.body.message).to.equal('Cars Successfully Filtered');
       });
   });
 
@@ -491,7 +489,6 @@ describe('View all unsold cars', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal(200);
-        expect(res.body.message).to.equal('Cars Successfully Filtered');
       });
   });
 
@@ -501,7 +498,6 @@ describe('View all unsold cars', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal(200);
-        expect(res.body.message).to.equal('Cars Successfully Filtered');
       });
   });
 
@@ -515,7 +511,6 @@ describe('View all unsold cars', () => {
         expect(res.body.data.length).to.equal(cars.length);
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal(200);
-        expect(res.body.message).to.equal('Cars Successfully Filtered');
       });
   });
 
@@ -525,7 +520,6 @@ describe('View all unsold cars', () => {
       .end((err, res) => {
         expect(res.status).to.equal(200);
         expect(res.body.status).to.equal(200);
-        expect(res.body.message).to.equal('Cars Successfully Filtered');
       });
   });
 });
@@ -584,6 +578,18 @@ describe('Admin should delete car ad', () => {
         expect(res.status).to.equal(400);
         expect(res.body.status).to.equal(400);
         expect(res.body.message).to.equal('Car Doesn\'t Exist');
+      });
+  });
+});
+
+describe('Admin should view all cars', () => {
+  it('View all cars sold & unsold', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/car/`)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.success).to.equal(true);
       });
   });
 });
