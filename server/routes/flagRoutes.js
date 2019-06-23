@@ -8,5 +8,6 @@ const flagRoutes = Router();
 flagRoutes.post('/', FlagValidation.validateFlag, FlagController.create);
 flagRoutes.get('/', AuthValidation.authorizeUser, AuthValidation.authorizeAdmin, FlagController.getAll);
 flagRoutes.get('/:flag_id', AuthValidation.authorizeUser, AuthValidation.authorizeAdmin, FlagController.get);
+flagRoutes.delete('/:flag_id', AuthValidation.authorizeUser, AuthValidation.authorizeAdmin, FlagController.deleteFlag);
 
 export default flagRoutes;

@@ -20,4 +20,10 @@ export default class Flag {
   static findById(id) {
     return flags.find(flag => flag.id === id);
   }
+
+  static deleteFlag(id) {
+    const flag = Flag.findById(id);
+    flags.splice(flags.indexOf(flag), 1);
+    return 'Flag Successfully Deleted';
+  }
 }

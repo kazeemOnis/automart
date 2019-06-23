@@ -45,4 +45,24 @@ export default class FlagController {
       );
     }
   }
+
+  static deleteFlag(req, res) {
+    try {
+      const id = parseInt(req.params.flag_id, 10);
+      const flag = Flag.findById(id);
+      if (flag === undefined) {
+        throw new ApiError('Cannot Find This Flag', 404);
+      }
+      const data = Flag.deleteFlag(id);
+      return res.status(200).send({
+        status: 200,
+        data,
+        success: true,
+      });
+    } catch (err) {
+      return res.status(err.status).send(
+        { status: err.status, message: err.message, success: err.success },
+      );
+    }
+  }
 }
