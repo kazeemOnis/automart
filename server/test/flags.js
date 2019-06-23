@@ -99,3 +99,66 @@ describe('Admin view all flags', () => {
       });
   });
 });
+
+describe('View a flag', () => {
+  it('Should not allow unauthorized users', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/1`)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Unauthorizerd Access, Provide Valid Token');
+      });
+  });
+
+  it('User should provide a token', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/1`)
+      .set({ authorization: null })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('No Authorization Token Provided');
+      });
+  });
+
+  it('Only admin can view all flags', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/1`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.message).to.equal('Only Admin Has Access');
+      });
+  });
+
+  it('Cannot view a flag that does not exist', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/20`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body.status).to.equal(404);
+        expect(res.body.message).to.equal('Cannot Find This Flag');
+        expect(res.body.success).to.equal(false);
+      });
+  });
+
+  it('Should return all information about flag', () => {
+    request(app)
+      .get(`${API_V1_PRFEIX}/flag/1`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        const foundFlag = Flag.findById(res.body.data.id);
+        expect(foundFlag).to.not.equal(null);
+        expect(foundFlag.car_id).to.equal(res.body.data.car_id);
+        expect(foundFlag.reason).to.equal(res.body.data.reason);
+        expect(foundFlag.description).to.equal(res.body.data.description);
+      });
+  });
+});
