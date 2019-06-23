@@ -162,3 +162,62 @@ describe('View a flag', () => {
       });
   });
 });
+
+describe('Delete a flag', () => {
+  it('Should not allow unauthorized users', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/flag/1`)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('Unauthorizerd Access, Provide Valid Token');
+      });
+  });
+
+  it('User should provide a token', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/flag/1`)
+      .set({ authorization: null })
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.success).to.equal(false);
+        expect(res.body.message).to.equal('No Authorization Token Provided');
+      });
+  });
+
+  it('Only admin can delete all flags', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/flag/1`)
+      .set(authHeader)
+      .end((err, res) => {
+        expect(res.status).to.equal(401);
+        expect(res.body.status).to.equal(401);
+        expect(res.body.message).to.equal('Only Admin Has Access');
+      });
+  });
+
+  it('Cannot delete a flag that does not exist', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/flag/20`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body.status).to.equal(404);
+        expect(res.body.message).to.equal('Cannot Find This Flag');
+        expect(res.body.success).to.equal(false);
+      });
+  });
+
+  it('Should delete the flag', () => {
+    request(app)
+      .delete(`${API_V1_PRFEIX}/flag/1`)
+      .set(adminAuth)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.status).to.equal(200);
+        expect(res.body.data).to.equal('Flag Successfully Deleted');
+      });
+  });
+});
